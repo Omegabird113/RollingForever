@@ -10,14 +10,15 @@ import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
+import io.github.omegabird113.rollingforever.utils.ColorUtils;
 
-/** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
 public class Main extends ApplicationAdapter {
+    private final Color BACKGROUND_COLOUR = ColorUtils.get8BitColor(153, 255, 236);
+
     private PerspectiveCamera camera;
     private Environment environment;
     private Array<ModelInstance> instances;
     private ModelBatch modelBatch;
-    private final Color BACKGROUND_COLOUR = new Color(153f/255f, 255f/255f, 236f/255f, 1.0f);
     private final Room room = new Room();
 
     @Override
@@ -38,6 +39,9 @@ public class Main extends ApplicationAdapter {
         // create and position model instances
         instances = new Array<>();
         instances.add(room.createGround(modelBuilder));
+        for (ModelInstance wall : room.createWalls(modelBuilder)) {
+            instances.add(wall);
+        }
 
         modelBatch = new ModelBatch();
     }
@@ -62,5 +66,6 @@ public class Main extends ApplicationAdapter {
     public void dispose() {
         modelBatch.dispose();
         room.disposeGround();
+        room.disposeWalls();
     }
 }
