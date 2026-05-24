@@ -20,6 +20,7 @@ public class Main extends ApplicationAdapter {
     private Array<ModelInstance> instances;
     private ModelBatch modelBatch;
     private final Room room = new Room();
+    private final Player player = new Player();
 
     @Override
     public void create() {
@@ -42,6 +43,7 @@ public class Main extends ApplicationAdapter {
         for (ModelInstance wall : room.createWalls(modelBuilder)) {
             instances.add(wall);
         }
+        instances.add(player.create(modelBuilder));
 
         modelBatch = new ModelBatch();
     }
@@ -67,5 +69,6 @@ public class Main extends ApplicationAdapter {
         modelBatch.dispose();
         room.disposeGround();
         room.disposeWalls();
+        player.dispose();
     }
 }
