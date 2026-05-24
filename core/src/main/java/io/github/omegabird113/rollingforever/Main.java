@@ -27,8 +27,8 @@ public class Main extends ApplicationAdapter {
         camera = new PerspectiveCamera(67, Gdx.graphics.getWidth(),  Gdx.graphics.getHeight());
         camera.position.set(0f, 25f, -2f);
         camera.lookAt(0,0,0);
-        camera.near = 0.1f;
-        camera.far = 30000f;
+        camera.near = 1f;
+        camera.far = 300f;
         camera.update();
 
         environment = new Environment();
@@ -37,7 +37,6 @@ public class Main extends ApplicationAdapter {
 
         ModelBuilder modelBuilder = new ModelBuilder();
 
-        // create and position model instances
         instances = new Array<>();
         instances.add(room.createGround(modelBuilder));
         for (ModelInstance wall : room.createWalls(modelBuilder)) {
