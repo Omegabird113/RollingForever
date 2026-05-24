@@ -16,9 +16,11 @@ public class Player {
     public final Vector3 position = new Vector3(0f, 1.5f, 0f);
     private final Vector3 velocity = new Vector3();
     private final Vector3 input = new Vector3();
+    private final Vector3 movementForce = new Vector3();
 
-    private static final float SPEED = 7f;
-    private static final float FRICTION = 22f;
+    private static final float FORCE = 35f;
+    private static final float DRAG = 2.8f;
+    private static final float MAX_SPEED = 14f;
     private static final float RADIUS = 1.5f;
 
     private Texture texturePlayer;
@@ -43,6 +45,15 @@ public class Player {
     }
 
     public void update(float delta) {
+        readInput();
+        applyMovementForce(delta);
+        applyDrag(delta);
+        clampSpeed();
+        moveWithCollision(delta);
+        instance.transform.setTranslation(position);
+    }
+
+    private void readInput() {
         input.setZero();
 
         if (Gdx.input.isKeyPressed(Input.Keys.W)) input.z += 1f;
@@ -50,15 +61,31 @@ public class Player {
         if (Gdx.input.isKeyPressed(Input.Keys.A)) input.x += 1f;
         if (Gdx.input.isKeyPressed(Input.Keys.D)) input.x -= 1f;
 
-        if (!input.isZero()) {
+        if (!input.isZero())
             input.nor();
-            velocity.x = input.x * SPEED;
-            velocity.z = input.z * SPEED;
-        } else {
-            velocity.x = approachZero(velocity.x, FRICTION * delta);
-            velocity.z = approachZero(velocity.z, FRICTION * delta);
-        }
+    }
 
+    private void applyMovementForce(float delta) {
+        movementForce.set(input.x, 0f, input.z).scl(FORCE);
+        velocity.mulAdd(movementForce, delta);
+    }
+
+    private void applyDrag(float delta) {
+        float dragFactor = Math.max(0f, 1f - DRAG * delta);
+        velocity.x *= dragFactor;
+        velocity.z *= dragFactor;
+    }
+
+    private void clampSpeed() {
+        float speed2 = velocity.x * velocity.x + velocity.z * velocity.z;
+        if (speed2 > MAX_SPEED * MAX_SPEED) {
+            float speed = (float)Math.sqrt(speed2);
+            velocity.x = velocity.x / speed * MAX_SPEED;
+            velocity.z = velocity.z / speed * MAX_SPEED;
+        }
+    }
+
+    private void moveWithCollision(float delta) {
         float nextX = position.x + velocity.x * delta;
         float nextZ = position.z + velocity.z * delta;
 
@@ -73,14 +100,6 @@ public class Player {
             position.z -= velocity.z * delta;
             velocity.z = 0f;
         }
-
-        instance.transform.setTranslation(position);
-    }
-
-    private float approachZero(float value, float amount) {
-        if (value > 0f) return Math.max(0f, value - amount);
-        if (value < 0f) return Math.min(0f, value + amount);
-        return 0f;
     }
 
     public void dispose() {
