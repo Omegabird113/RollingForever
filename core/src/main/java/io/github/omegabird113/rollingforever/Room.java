@@ -24,7 +24,7 @@ public class Room {
         textureGround.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Nearest);
         textureGround.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
         TextureRegion textureRegion = new TextureRegion(textureGround);
-        int repeats = 7;
+        int repeats = 8;
         textureRegion.setRegion(0,0,textureGround.getWidth()*repeats, textureGround.getHeight()*repeats);
 
         // create model
@@ -40,27 +40,27 @@ public class Room {
         textureWalls.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Nearest);
         textureWalls.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
         TextureRegion textureRegion = new TextureRegion(textureWalls);
-        int repeats = 7;
+        int repeats = 6;
         textureRegion.setRegion(0,0,textureGround.getWidth(), textureGround.getHeight()*repeats);
 
-        modelWallEast = modelBuilder.createBox(0.5f, 8f, 24.5f,
+        modelWallEast = modelBuilder.createBox(0.5f, 6f, 24.5f,
             new Material(TextureAttribute.createDiffuse(textureRegion)),
             VertexAttributes.Usage.Position | VertexAttributes.Usage.Normal | VertexAttributes.Usage.TextureCoordinates);
-        modelWallWest = modelBuilder.createBox(0.5f, 8f, 24.5f,
+        modelWallWest = modelBuilder.createBox(0.5f, 6f, 24.5f,
             new Material(TextureAttribute.createDiffuse(textureRegion)),
             VertexAttributes.Usage.Position | VertexAttributes.Usage.Normal | VertexAttributes.Usage.TextureCoordinates);
-        modelWallNorth = modelBuilder.createBox(25.5f, 8f, 0.5f,
+        modelWallNorth = modelBuilder.createBox(25.5f, 6f, 0.5f,
             new Material(TextureAttribute.createDiffuse(textureRegion)),
             VertexAttributes.Usage.Position | VertexAttributes.Usage.Normal | VertexAttributes.Usage.TextureCoordinates);
-        modelWallSouth = modelBuilder.createBox(25.5f, 8f, 0.5f,
+        modelWallSouth = modelBuilder.createBox(25.5f, 6f, 0.5f,
             new Material(TextureAttribute.createDiffuse(textureRegion)),
             VertexAttributes.Usage.Position | VertexAttributes.Usage.Normal | VertexAttributes.Usage.TextureCoordinates);
 
         return new ModelInstance[]{
-            new ModelInstance(modelWallEast, 12.5f, 0f, 0f),
-            new ModelInstance(modelWallWest, -12.5f, 0f, 0f),
-            new ModelInstance(modelWallNorth, 0f, 0f, 12.5f),
-            new ModelInstance(modelWallSouth, 0f, 0f, -12.5f)
+            new ModelInstance(modelWallEast, 12.5f, 2f, 0f),
+            new ModelInstance(modelWallWest, -12.5f, 2f, 0f),
+            new ModelInstance(modelWallNorth, 0f, 2f, 12.5f),
+            new ModelInstance(modelWallSouth, 0f, 2f, -12.5f)
         };
     }
 
