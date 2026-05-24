@@ -5,12 +5,9 @@ on:
   push:
     branches:
       - master
-    paths:
-      - 'core/**'
-      - 'teavm/**'
 
 concurrency:
-  group: pages-${{ github.ref }}
+  group: pages-deployment
   cancel-in-progress: true
 
 jobs:
