@@ -18,9 +18,11 @@ public class Player {
     private final Vector3 input = new Vector3();
     private final Vector3 movementForce = new Vector3();
 
-    private static final float FORCE = 43f;
-    private static final float DRAG = 1.7f;
-    private static final float MAX_SPEED = 7f;
+    private static final float FORCE = 29f;
+    private static final float ACTIVE_DRAG = 0.57f;
+    private static final float COAST_DRAG = 0.21f;
+    private static final float MAX_SPEED = 12f;
+    private static final float WALL_BOUNCE = 0.4f;
     private static final float RADIUS = 1.5f;
 
     private Texture texturePlayer;
@@ -71,7 +73,8 @@ public class Player {
     }
 
     private void applyDrag(float delta) {
-        float dragFactor = Math.max(0f, 1f - DRAG * delta);
+        float drag = input.isZero() ? COAST_DRAG : ACTIVE_DRAG;
+        float dragFactor = Math.max(0f, 1f - drag * delta);
         velocity.x *= dragFactor;
         velocity.z *= dragFactor;
     }
@@ -92,13 +95,13 @@ public class Player {
         position.x = nextX;
         if (CollisionManager.collidesWithWall(position, RADIUS)) {
             position.x -= velocity.x * delta;
-            velocity.x = 0f;
+            velocity.x = -velocity.x * WALL_BOUNCE;
         }
 
         position.z = nextZ;
         if (CollisionManager.collidesWithWall(position, RADIUS)) {
             position.z -= velocity.z * delta;
-            velocity.z = 0f;
+            velocity.z = -velocity.z * WALL_BOUNCE;
         }
     }
 
