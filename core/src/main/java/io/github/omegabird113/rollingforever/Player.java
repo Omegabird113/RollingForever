@@ -17,8 +17,8 @@ public class Player {
     private final Vector3 velocity = new Vector3();
     private final Vector3 input = new Vector3();
 
-    private static final float SPEED = 12f;
-    private static final float FRICTION = 10f;
+    private static final float SPEED = 7f;
+    private static final float FRICTION = 22f;
 
     private Texture texturePlayer;
     private Model modelPlayer;

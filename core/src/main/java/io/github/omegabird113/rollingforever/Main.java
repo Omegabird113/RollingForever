@@ -52,12 +52,11 @@ public class Main extends ApplicationAdapter {
     public void render() {
         float delta = Gdx.graphics.getDeltaTime();
 
-        ScreenUtils.clear(BACKGROUND_COLOUR);
-        modelBatch.begin(camera);
-
         player.update(delta);
         followPlayerWithCamera();
 
+        ScreenUtils.clear(BACKGROUND_COLOUR, true);
+        modelBatch.begin(camera);
         modelBatch.render(instances, environment);
         modelBatch.end();
     }
