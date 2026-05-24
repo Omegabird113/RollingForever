@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.VertexAttributes;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g3d.Material;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
@@ -20,7 +19,7 @@ public class Player {
 
     private static final float FORCE = 29f;
     private static final float ACTIVE_DRAG = 0.57f;
-    private static final float COAST_DRAG = 0.21f;
+    private static final float COAST_DRAG = 0.15f;
     private static final float MAX_SPEED = 12f;
     private static final float WALL_BOUNCE = 0.4f;
     private static final float RADIUS = 1.5f;
@@ -33,11 +32,9 @@ public class Player {
         texturePlayer = new Texture(Gdx.files.internal("player.png"), true);
         texturePlayer.setFilter(Texture.TextureFilter.MipMapNearestNearest, Texture.TextureFilter.Nearest);
         texturePlayer.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
-        TextureRegion textureRegion = new TextureRegion(texturePlayer);
-        textureRegion.setRegion(0,0,texturePlayer.getWidth(), texturePlayer.getHeight());
 
-        modelPlayer = modelBuilder.createSphere(3f, 3f, 3f, 24, 4,
-            new Material(TextureAttribute.createDiffuse(textureRegion)),
+        modelPlayer = modelBuilder.createSphere(3f, 3f, 3f, 30, 30,
+            new Material(TextureAttribute.createDiffuse(texturePlayer)),
             VertexAttributes.Usage.Position
                 | VertexAttributes.Usage.Normal
                 | VertexAttributes.Usage.TextureCoordinates);
@@ -50,7 +47,7 @@ public class Player {
         readInput();
         applyMovementForce(delta);
         applyDrag(delta);
-        clampSpeed();
+        limitSpeed();
         moveWithCollision(delta);
         instance.transform.setTranslation(position);
     }
@@ -79,7 +76,7 @@ public class Player {
         velocity.z *= dragFactor;
     }
 
-    private void clampSpeed() {
+    private void limitSpeed() {
         float speed2 = velocity.x * velocity.x + velocity.z * velocity.z;
         if (speed2 > MAX_SPEED * MAX_SPEED) {
             float speed = (float)Math.sqrt(speed2);

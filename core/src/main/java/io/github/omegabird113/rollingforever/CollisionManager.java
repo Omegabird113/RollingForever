@@ -16,7 +16,6 @@ public final class CollisionManager {
         wallBoundsList.add(wallBounds);
     }
 
-
     public static boolean collidesWithWall(Vector3 position, float radius) {
         for (WallBounds wall : wallBoundsList)
             if (wall.overlapsCircle(position, radius))
