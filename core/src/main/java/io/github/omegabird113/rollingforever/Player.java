@@ -19,6 +19,7 @@ public class Player {
 
     private static final float SPEED = 7f;
     private static final float FRICTION = 22f;
+    private static final float RADIUS = 1.5f;
 
     private Texture texturePlayer;
     private Model modelPlayer;
@@ -58,7 +59,21 @@ public class Player {
             velocity.z = approachZero(velocity.z, FRICTION * delta);
         }
 
-        position.mulAdd(velocity, delta);
+        float nextX = position.x + velocity.x * delta;
+        float nextZ = position.z + velocity.z * delta;
+
+        position.x = nextX;
+        if (CollisionManager.collidesWithWall(position, RADIUS)) {
+            position.x -= velocity.x * delta;
+            velocity.x = 0f;
+        }
+
+        position.z = nextZ;
+        if (CollisionManager.collidesWithWall(position, RADIUS)) {
+            position.z -= velocity.z * delta;
+            velocity.z = 0f;
+        }
+
         instance.transform.setTranslation(position);
     }
 

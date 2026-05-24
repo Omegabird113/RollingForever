@@ -56,12 +56,18 @@ public class Room {
             new Material(TextureAttribute.createDiffuse(textureRegion)),
             VertexAttributes.Usage.Position | VertexAttributes.Usage.Normal | VertexAttributes.Usage.TextureCoordinates);
 
-        return new ModelInstance[]{
+        ModelInstance[] models = new ModelInstance[]{
             new ModelInstance(modelWallEast, 12.5f, 2f, 0f),
             new ModelInstance(modelWallWest, -12.5f, 2f, 0f),
             new ModelInstance(modelWallNorth, 0f, 2f, 12.5f),
             new ModelInstance(modelWallSouth, 0f, 2f, -12.5f)
         };
+
+        for (ModelInstance modelInstance : models) {
+            CollisionManager.addWallBounds(new WallBounds(modelInstance));
+        }
+
+        return models;
     }
 
     public void disposeGround() {
