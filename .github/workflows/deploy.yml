@@ -32,7 +32,7 @@ jobs:
         run: ./gradlew :teavm:build
 
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v7
+        uses: actions/upload-pages-artifact@v3
         with:
           path: teavm/build/dist/
 
