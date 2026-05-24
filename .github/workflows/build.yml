@@ -1,0 +1,39 @@
+name: Build
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Set up JDK 25
+        uses: actions/setup-java@v5
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: gradle
+
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
+      - name: Build LWJGL3 & TeaVM projects
+        run: ./gradlew :lwjgl3:build :teavm:build
+
+      - name: Upload LWJGL3 jar
+        uses: actions/upload-artifact@v7
+        with:
+          name: rollingforever-lwjgl3-build
+          path: lwjgl3/build/libs/*.jar
+
+      - name: Upload TeaVM build
+        uses: actions/upload-artifact@v7
+        with:
+          name: rollingforever-teavm-build
+          path: teavm/build/dist/**
