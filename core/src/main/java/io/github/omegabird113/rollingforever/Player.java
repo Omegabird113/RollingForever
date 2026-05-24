@@ -18,9 +18,9 @@ public class Player {
     private final Vector3 input = new Vector3();
     private final Vector3 movementForce = new Vector3();
 
-    private static final float FORCE = 35f;
-    private static final float DRAG = 2.8f;
-    private static final float MAX_SPEED = 14f;
+    private static final float FORCE = 43f;
+    private static final float DRAG = 1.7f;
+    private static final float MAX_SPEED = 7f;
     private static final float RADIUS = 1.5f;
 
     private Texture texturePlayer;
