@@ -50,11 +50,22 @@ public class Main extends ApplicationAdapter {
 
     @Override
     public void render() {
-        // render
+        float delta = Gdx.graphics.getDeltaTime();
+
         ScreenUtils.clear(BACKGROUND_COLOUR);
         modelBatch.begin(camera);
+
+        player.update(delta);
+        followPlayerWithCamera();
+
         modelBatch.render(instances, environment);
         modelBatch.end();
+    }
+
+    private void followPlayerWithCamera() {
+        camera.position.set(player.position.x, player.position.y + 22f, player.position.z - 18f);
+        camera.lookAt(player.position.x, player.position.y, player.position.z);
+        camera.update();
     }
 
     @Override
