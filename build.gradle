@@ -56,7 +56,7 @@ configure(subprojects) {
 
 subprojects {
   version = "$projectVersion"
-  ext.appName = 'Rolling Foreger'
+  ext.appName = 'Rolling Forever'
   repositories {
     mavenCentral()
     // You may want to remove the following line if you have errors downloading dependencies.
@@ -67,4 +67,4 @@ subprojects {
   }
 }
 
-eclipse.project.name = 'Rolling Foreger' + '-parent'
+eclipse.project.name = 'Rolling Forever' + '-parent'
