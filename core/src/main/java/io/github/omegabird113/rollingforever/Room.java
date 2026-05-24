@@ -24,7 +24,7 @@ public class Room {
         textureGround.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Nearest);
         textureGround.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
         TextureRegion textureRegion = new TextureRegion(textureGround);
-        int repeats = 4;
+        int repeats = 7;
         textureRegion.setRegion(0,0,textureGround.getWidth()*repeats, textureGround.getHeight()*repeats);
 
         // create model
@@ -40,8 +40,8 @@ public class Room {
         textureWalls.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Nearest);
         textureWalls.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
         TextureRegion textureRegion = new TextureRegion(textureWalls);
-        int repeats = 3;
-        textureRegion.setRegion(0,0,textureGround.getWidth()*repeats, textureGround.getHeight());
+        int repeats = 7;
+        textureRegion.setRegion(0,0,textureGround.getWidth(), textureGround.getHeight()*repeats);
 
         modelWallEast = modelBuilder.createBox(0.5f, 8f, 24.5f,
             new Material(TextureAttribute.createDiffuse(textureRegion)),
