@@ -27,7 +27,7 @@ public class Room {
         textureGround.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
         TextureRegion textureRegion = new TextureRegion(textureGround);
         int repeats = 8;
-        textureRegion.setRegion(0,0,textureGround.getWidth()*repeats, textureGround.getHeight()*repeats);
+        textureRegion.setRegion(0, 0, textureGround.getWidth() * repeats, textureGround.getHeight() * repeats);
 
         // create model
         modelGround = modelBuilder.createBox(25f, 1f, 25f,
@@ -43,7 +43,7 @@ public class Room {
         textureWalls.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
         TextureRegion textureRegion = new TextureRegion(textureWalls);
         int repeats = 6;
-        textureRegion.setRegion(0,0,textureGround.getWidth(), textureGround.getHeight()*repeats);
+        textureRegion.setRegion(0, 0, textureGround.getWidth(), textureGround.getHeight() * repeats);
 
         modelWallEast = modelBuilder.createBox(0.5f, 6f, 24.5f,
             new Material(TextureAttribute.createDiffuse(textureRegion)),

@@ -4,7 +4,9 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
-import com.badlogic.gdx.graphics.g3d.*;
+import com.badlogic.gdx.graphics.g3d.Environment;
+import com.badlogic.gdx.graphics.g3d.ModelBatch;
+import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
@@ -15,19 +17,18 @@ import io.github.omegabird113.rollingforever.utils.ColorUtils;
 
 public class Main extends ApplicationAdapter {
     private final Color BACKGROUND_COLOUR = ColorUtils.get8BitColor(153, 255, 236);
-
+    private final Room room = new Room();
+    private final Player player = new Player();
     private PerspectiveCamera camera;
     private Environment environment;
     private Array<ModelInstance> instances;
     private ModelBatch modelBatch;
-    private final Room room = new Room();
-    private final Player player = new Player();
 
     @Override
     public void create() {
-        camera = new PerspectiveCamera(67, Gdx.graphics.getWidth(),  Gdx.graphics.getHeight());
+        camera = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         camera.position.set(0f, 25f, -2f);
-        camera.lookAt(0,0,0);
+        camera.lookAt(0, 0, 0);
         camera.near = 1f;
         camera.far = 300f;
         camera.update();

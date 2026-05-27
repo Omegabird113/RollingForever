@@ -12,10 +12,10 @@ import com.badlogic.gdx.math.Vector3;
 import io.github.omegabird113.rollingforever.physics.RollingMovement;
 
 public class Player {
+    private final RollingMovement rollingMovement = new RollingMovement(29f, 0.57f, 0.15f, 12f, 0.4f, 1.5f);
     private Texture texturePlayer;
     private Model modelPlayer;
     private ModelInstance instance;
-    private final RollingMovement rollingMovement = new RollingMovement(29f, 0.57f, 0.15f, 12f, 0.4f, 1.5f);
 
     public ModelInstance create(ModelBuilder modelBuilder) {
         texturePlayer = new Texture(Gdx.files.internal("player.png"), true);

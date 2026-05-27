@@ -4,9 +4,10 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 
 public final class CollisionManager {
-    private CollisionManager() {}
-
     private static final Array<WallBounds> wallBoundsList = new Array<>();
+
+    private CollisionManager() {
+    }
 
     public static WallBounds[] getAllWallBounds() {
         return wallBoundsList.toArray();

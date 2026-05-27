@@ -62,7 +62,7 @@ public class RollingMovement {
     private void limitSpeed() {
         float speed2 = velocity.x * velocity.x + velocity.z * velocity.z;
         if (speed2 > MAX_SPEED * MAX_SPEED) {
-            float speed = (float)Math.sqrt(speed2);
+            float speed = (float) Math.sqrt(speed2);
             velocity.x = velocity.x / speed * MAX_SPEED;
             velocity.z = velocity.z / speed * MAX_SPEED;
         }
