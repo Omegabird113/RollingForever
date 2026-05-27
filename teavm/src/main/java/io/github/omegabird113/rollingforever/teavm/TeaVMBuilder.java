@@ -3,10 +3,11 @@ package io.github.omegabird113.rollingforever.teavm;
 import com.github.xpenatan.gdx.teavm.backends.shared.config.AssetFileHandle;
 import com.github.xpenatan.gdx.teavm.backends.shared.config.compiler.TeaCompiler;
 import com.github.xpenatan.gdx.teavm.backends.web.config.backend.WebBackend;
-import java.io.File;
 import org.teavm.tooling.TeaVMSourceFilePolicy;
 import org.teavm.tooling.sources.DirectorySourceFileProvider;
 import org.teavm.vm.TeaVMOptimizationLevel;
+
+import java.io.File;
 
 public class TeaVMBuilder {
     public static void main(String[] args) {

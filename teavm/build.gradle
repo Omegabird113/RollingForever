@@ -2,7 +2,7 @@ plugins {
   id 'java'
 }
 
-sourceSets.main.resources.srcDirs += [ rootProject.file('assets').path ]
+sourceSets.main.resources.srcDirs += [rootProject.file('assets').path]
 project.ext.mainClassName = "io.github.omegabird113.rollingforever.teavm.TeaVMBuilder"
 eclipse.project.name = appName + "-teavm"
 
@@ -54,7 +54,7 @@ tasks.register("buildDebug", JavaExec) {
 }
 
 // For backwards compatibility with the earlier run and build tasks.
-tasks.register("run"){
+tasks.register("run") {
   dependsOn runRelease
 }
 build.dependsOn buildRelease

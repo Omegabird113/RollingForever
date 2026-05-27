@@ -1,7 +1,7 @@
 package io.github.omegabird113.rollingforever.teavm;
 
-import com.github.xpenatan.gdx.teavm.backends.web.WebApplicationConfiguration;
 import com.github.xpenatan.gdx.teavm.backends.web.WebApplication;
+import com.github.xpenatan.gdx.teavm.backends.web.WebApplicationConfiguration;
 import io.github.omegabird113.rollingforever.Main;
 
 public class TeaVMLauncher {
