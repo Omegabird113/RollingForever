@@ -9,9 +9,9 @@ import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
+import io.github.omegabird113.rollingforever.utils.CameraFollowUtils;
 
 public class Main extends ApplicationAdapter {
     private final Room room = new Room();
@@ -53,20 +53,14 @@ public class Main extends ApplicationAdapter {
         float delta = Gdx.graphics.getDeltaTime();
 
         player.update(delta);
-        followPlayerWithCamera();
+        CameraFollowUtils.updateCameraTo(camera, player.getPosition());
+        camera.update();
         skyBox.update(camera.position);
 
         ScreenUtils.clear(0f, 0f, 0f, 1f, true);
         modelBatch.begin(camera);
         modelBatch.render(instances, environment);
         modelBatch.end();
-    }
-
-    private void followPlayerWithCamera() {
-        Vector3 position = player.getPosition();
-        camera.position.set(position.x, position.y + 22f, position.z - 18f);
-        camera.lookAt(position.x, position.y, position.z);
-        camera.update();
     }
 
     @Override
