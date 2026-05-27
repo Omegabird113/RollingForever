@@ -2,7 +2,6 @@ package io.github.omegabird113.rollingforever;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
@@ -13,12 +12,11 @@ import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
-import io.github.omegabird113.rollingforever.utils.ColorUtils;
 
 public class Main extends ApplicationAdapter {
-    private final Color BACKGROUND_COLOUR = ColorUtils.get8BitColor(153, 255, 236);
     private final Room room = new Room();
     private final Player player = new Player();
+    private final SkyBox skyBox = new SkyBox();
     private PerspectiveCamera camera;
     private Environment environment;
     private Array<ModelInstance> instances;
@@ -40,6 +38,7 @@ public class Main extends ApplicationAdapter {
         ModelBuilder modelBuilder = new ModelBuilder();
 
         instances = new Array<>();
+        instances.add(skyBox.create(modelBuilder));
         instances.add(room.createGround(modelBuilder));
         for (ModelInstance wall : room.createWalls(modelBuilder)) {
             instances.add(wall);
@@ -55,8 +54,9 @@ public class Main extends ApplicationAdapter {
 
         player.update(delta);
         followPlayerWithCamera();
+        skyBox.update(camera.position);
 
-        ScreenUtils.clear(BACKGROUND_COLOUR, true);
+        ScreenUtils.clear(0f, 0f, 0f, 1f, true);
         modelBatch.begin(camera);
         modelBatch.render(instances, environment);
         modelBatch.end();
@@ -82,5 +82,6 @@ public class Main extends ApplicationAdapter {
         room.disposeGround();
         room.disposeWalls();
         player.dispose();
+        skyBox.dispose();
     }
 }
