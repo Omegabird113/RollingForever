@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g3d.*;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import io.github.omegabird113.rollingforever.utils.ColorUtils;
@@ -61,8 +62,9 @@ public class Main extends ApplicationAdapter {
     }
 
     private void followPlayerWithCamera() {
-        camera.position.set(player.position.x, player.position.y + 22f, player.position.z - 18f);
-        camera.lookAt(player.position.x, player.position.y, player.position.z);
+        Vector3 position = player.getPosition();
+        camera.position.set(position.x, position.y + 22f, position.z - 18f);
+        camera.lookAt(position.x, position.y, position.z);
         camera.update();
     }
 

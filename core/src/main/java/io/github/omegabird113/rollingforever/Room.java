@@ -9,6 +9,8 @@ import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
+import io.github.omegabird113.rollingforever.physics.CollisionManager;
+import io.github.omegabird113.rollingforever.physics.WallBounds;
 
 public class Room {
     private Model modelGround;

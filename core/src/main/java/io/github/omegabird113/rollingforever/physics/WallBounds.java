@@ -1,4 +1,4 @@
-package io.github.omegabird113.rollingforever;
+package io.github.omegabird113.rollingforever.physics;
 
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.math.MathUtils;
