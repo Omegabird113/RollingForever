@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.math.Vector3;
 
 public final class CameraFollowUtils {
-    private static final Vector3 relativePosition = new Vector3(0f, 22f, -10f);
+    private static final Vector3 relativePosition = new Vector3(0f, 22f, -18f);
 
     private CameraFollowUtils() {
     }
