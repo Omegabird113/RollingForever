@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import io.github.omegabird113.rollingforever.utils.CameraFollowUtils;
+import io.github.omegabird113.rollingforever.utils.ColorUtils;
 
 public class Main extends ApplicationAdapter {
     private final Room room = new Room();
@@ -57,7 +58,7 @@ public class Main extends ApplicationAdapter {
         camera.update();
         skyBox.update(camera.position);
 
-        ScreenUtils.clear(0f, 0f, 0f, 1f, true);
+        ScreenUtils.clear(ColorUtils.BLACK, true);
         modelBatch.begin(camera);
         modelBatch.render(instances, environment);
         modelBatch.end();
