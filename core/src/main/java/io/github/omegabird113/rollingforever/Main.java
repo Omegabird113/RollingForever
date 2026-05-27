@@ -11,6 +11,9 @@ import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
+import io.github.omegabird113.rollingforever.objects.Player;
+import io.github.omegabird113.rollingforever.objects.Room;
+import io.github.omegabird113.rollingforever.objects.SkyBox;
 import io.github.omegabird113.rollingforever.utils.CameraFollowUtils;
 import io.github.omegabird113.rollingforever.utils.ColorUtils;
 

@@ -1,4 +1,4 @@
-package io.github.omegabird113.rollingforever;
+package io.github.omegabird113.rollingforever.objects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
