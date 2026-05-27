@@ -21,4 +21,8 @@ public final class CameraFollowUtils {
     public static Vector3 getRelativePosition() {
         return relativePosition;
     }
+
+    public static void setRelativePosition(Vector3 relativePosition) {
+        CameraFollowUtils.relativePosition.set(relativePosition);
+    }
 }
