@@ -1,8 +1,7 @@
 package io.github.omegabird113.rollingforever.physics;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector3;
+import io.github.omegabird113.rollingforever.utils.InputKeyUtils;
 
 public class RollingMovement {
     private final Vector3 position = new Vector3(0f, 1.5f, 0f);
@@ -38,10 +37,10 @@ public class RollingMovement {
     private void readInput() {
         input.setZero();
 
-        if (Gdx.input.isKeyPressed(Input.Keys.W)) input.z += 1f;
-        if (Gdx.input.isKeyPressed(Input.Keys.S)) input.z -= 1f;
-        if (Gdx.input.isKeyPressed(Input.Keys.A)) input.x += 1f;
-        if (Gdx.input.isKeyPressed(Input.Keys.D)) input.x -= 1f;
+        if (InputKeyUtils.isKeyDown(InputKeyUtils.KeyType.FORWARD)) input.z += 1f;
+        if (InputKeyUtils.isKeyDown(InputKeyUtils.KeyType.BACKWARD)) input.z -= 1f;
+        if (InputKeyUtils.isKeyDown(InputKeyUtils.KeyType.LEFT)) input.x += 1f;
+        if (InputKeyUtils.isKeyDown(InputKeyUtils.KeyType.RIGHT)) input.x -= 1f;
 
         if (!input.isZero())
             input.nor();
