@@ -43,10 +43,7 @@ public class Main extends ApplicationAdapter {
 
         instances = new Array<>();
         instances.add(skyBox.create(modelBuilder));
-        instances.add(room.createGround(modelBuilder));
-        for (ModelInstance wall : room.createWalls(modelBuilder)) {
-            instances.add(wall);
-        }
+        instances.addAll(room.create(modelBuilder));
         instances.add(player.create(modelBuilder));
 
         modelBatch = new ModelBatch();
@@ -77,8 +74,7 @@ public class Main extends ApplicationAdapter {
     @Override
     public void dispose() {
         modelBatch.dispose();
-        room.disposeGround();
-        room.disposeWalls();
+        room.dispose();
         player.dispose();
         skyBox.dispose();
     }

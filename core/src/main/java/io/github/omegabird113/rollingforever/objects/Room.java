@@ -12,6 +12,9 @@ import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import io.github.omegabird113.rollingforever.physics.CollisionManager;
 import io.github.omegabird113.rollingforever.physics.WallBounds;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Room {
     private Model modelGround;
     private Model modelWallEast;
@@ -21,7 +24,7 @@ public class Room {
     private Texture textureGround;
     private Texture textureWalls;
 
-    public ModelInstance createGround(ModelBuilder modelBuilder) {
+    private ModelInstance createGround(ModelBuilder modelBuilder) {
         textureGround = new Texture(Gdx.files.internal("ground.png"), true);
         textureGround.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Nearest);
         textureGround.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
@@ -37,7 +40,7 @@ public class Room {
         return new ModelInstance(modelGround, 0, -1, 0);
     }
 
-    public ModelInstance[] createWalls(ModelBuilder modelBuilder) {
+    private ModelInstance[] createWalls(ModelBuilder modelBuilder) {
         textureWalls = new Texture(Gdx.files.internal("walls.png"), true);
         textureWalls.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Nearest);
         textureWalls.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
@@ -72,16 +75,30 @@ public class Room {
         return models;
     }
 
-    public void disposeGround() {
+    public ModelInstance[] create(ModelBuilder modelBuilder) {
+        ArrayList<ModelInstance> modelInstances = new ArrayList<>();
+        ModelInstance ground = createGround(modelBuilder);
+        modelInstances.add(ground);
+        ModelInstance[] walls = createWalls(modelBuilder);
+        modelInstances.addAll(List.of(walls));
+        return modelInstances.toArray(new ModelInstance[0]);
+    }
+
+    private void disposeGround() {
         modelGround.dispose();
         textureGround.dispose();
     }
 
-    public void disposeWalls() {
+    private void disposeWalls() {
         textureWalls.dispose();
         modelWallEast.dispose();
         modelWallWest.dispose();
         modelWallNorth.dispose();
         modelWallSouth.dispose();
+    }
+
+    public void dispose() {
+        disposeGround();
+        disposeWalls();
     }
 }
