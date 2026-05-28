@@ -29,8 +29,8 @@ public class Main extends ApplicationAdapter {
     @Override
     public void create() {
         camera = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        camera.position.set(0f, 25f, -2f);
-        camera.lookAt(0, 0, 0);
+        camera.position.set(CameraFollowUtils.getRelativePosition());
+        camera.lookAt(0f, 0f, 0f);
         camera.near = 1f;
         camera.far = 300f;
         camera.update();
