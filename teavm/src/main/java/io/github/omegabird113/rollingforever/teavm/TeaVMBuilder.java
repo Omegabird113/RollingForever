@@ -24,7 +24,7 @@ public class TeaVMBuilder {
                 .setHtmlWidth(1280)
                 .setHtmlHeight(720)
                 .setHtmlTitle("Rolling Forever")
-                .setWebAssembly(false)
+                .setWebAssembly(true)
                 .setStartJettyAfterBuild(startJetty)
                 .setJettyPort(8080)
         )
