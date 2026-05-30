@@ -14,24 +14,24 @@ import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
 
-public class SkyBox {
+public class Sky {
     private static final float SPHERE_RADIUS = 250f;
     private static final int HORIZONTAL_SEGMENTS = 96;
     private static final int VERTICAL_SEGMENTS = 48;
 
-    private Texture textureSkyBox;
-    private Model modelSkyBox;
+    private Texture textureSky;
+    private Model modelSky;
     private ModelInstance instance;
 
     public ModelInstance create(ModelBuilder modelBuilder) {
-        textureSkyBox = loadSkyTexture();
+        textureSky = loadSkyTexture();
 
         modelBuilder.begin();
         MeshPartBuilder meshBuilder = createSkySpherePart(modelBuilder);
         buildSphereGridMesh(meshBuilder);
-        modelSkyBox = modelBuilder.end();
+        modelSky = modelBuilder.end();
 
-        instance = new ModelInstance(modelSkyBox);
+        instance = new ModelInstance(modelSky);
         return instance;
     }
 
@@ -44,7 +44,7 @@ public class SkyBox {
 
     private MeshPartBuilder createSkySpherePart(ModelBuilder modelBuilder) {
         Material material = new Material(
-            new TextureAttribute(TextureAttribute.Diffuse, textureSkyBox),
+            new TextureAttribute(TextureAttribute.Diffuse, textureSky),
             IntAttribute.createCullFace(GL20.GL_NONE) // render the inside surface
         );
 
@@ -96,7 +96,7 @@ public class SkyBox {
     }
 
     public void dispose() {
-        modelSkyBox.dispose();
-        textureSkyBox.dispose();
+        modelSky.dispose();
+        textureSky.dispose();
     }
 }

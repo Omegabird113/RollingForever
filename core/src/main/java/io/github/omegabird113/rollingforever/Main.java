@@ -13,14 +13,14 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import io.github.omegabird113.rollingforever.objects.Player;
 import io.github.omegabird113.rollingforever.objects.Room;
-import io.github.omegabird113.rollingforever.objects.SkyBox;
+import io.github.omegabird113.rollingforever.objects.Sky;
 import io.github.omegabird113.rollingforever.utils.CameraFollowUtils;
 import io.github.omegabird113.rollingforever.utils.ColorUtils;
 
 public class Main extends ApplicationAdapter {
     private final Room room = new Room();
     private final Player player = new Player();
-    private final SkyBox skyBox = new SkyBox();
+    private final Sky sky = new Sky();
     private PerspectiveCamera camera;
     private Environment environment;
     private Array<ModelInstance> instances;
@@ -42,7 +42,7 @@ public class Main extends ApplicationAdapter {
         ModelBuilder modelBuilder = new ModelBuilder();
 
         instances = new Array<>();
-        instances.add(skyBox.create(modelBuilder));
+        instances.add(sky.create(modelBuilder));
         instances.addAll(room.create(modelBuilder));
         instances.add(player.create(modelBuilder));
 
@@ -56,7 +56,7 @@ public class Main extends ApplicationAdapter {
         player.update(delta);
         CameraFollowUtils.updateCameraTo(camera, player.getPosition());
         camera.update();
-        skyBox.update(camera.position);
+        sky.update(camera.position);
 
         ScreenUtils.clear(ColorUtils.BLACK, true);
         modelBatch.begin(camera);
@@ -76,6 +76,6 @@ public class Main extends ApplicationAdapter {
         modelBatch.dispose();
         room.dispose();
         player.dispose();
-        skyBox.dispose();
+        sky.dispose();
     }
 }
