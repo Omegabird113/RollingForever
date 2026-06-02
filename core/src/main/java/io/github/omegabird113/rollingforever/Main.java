@@ -14,6 +14,7 @@ public class Main extends ApplicationAdapter {
     private PerspectiveCamera camera;
     private Environment environment;
     private ModelBatch modelBatch;
+    private final InstanceManager instanceManager = new InstanceManager();
 
     @Override
     public void create() {
@@ -29,14 +30,14 @@ public class Main extends ApplicationAdapter {
         environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
 
         ModelBuilder modelBuilder = new ModelBuilder();
-        InstanceManager.createInitial(modelBuilder);
+        instanceManager.createInitial(modelBuilder);
         modelBatch = new ModelBatch();
     }
 
     @Override
     public void render() {
         float delta = Gdx.graphics.getDeltaTime();
-        InstanceManager.render(delta, modelBatch, camera, environment);
+        instanceManager.render(delta, modelBatch, camera, environment);
     }
 
     @Override
@@ -49,6 +50,6 @@ public class Main extends ApplicationAdapter {
     @Override
     public void dispose() {
         modelBatch.dispose();
-        InstanceManager.disposeAll();
+        instanceManager.disposeAll();
     }
 }

@@ -16,32 +16,30 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public final class InstanceManager {
-    private InstanceManager() {}
+public  class InstanceManager {
+    private final Room room = new Room();
+    private final Player player = new Player();
+    private final Sky sky = new Sky();
 
-    private static final Room room = new Room();
-    private static final Player player = new Player();
-    private static final Sky sky = new Sky();
+    public final ArrayList<ModelInstance> instances = new ArrayList<>();
 
-    public static final ArrayList<ModelInstance> instances = new ArrayList<>();
-
-    public static ArrayList<ModelInstance> getInstances() {
+    public ArrayList<ModelInstance> getInstances() {
         return instances;
     }
 
-    public static void add(ModelInstance instance) {
+    public void add(ModelInstance instance) {
         instances.add(instance);
     }
 
-    public static void add(Collection<ModelInstance> instances) {
-        InstanceManager.instances.addAll(instances);
+    public void add(Collection<ModelInstance> instances) {
+        this.instances.addAll(instances);
     }
 
-    public static void add(ModelInstance[] instances) {
-        InstanceManager.instances.addAll(List.of(instances));
+    public void add(ModelInstance[] instances) {
+        this.instances.addAll(List.of(instances));
     }
 
-    static void render(float delta, ModelBatch modelBatch, PerspectiveCamera camera, Environment environment) {
+    void render(float delta, ModelBatch modelBatch, PerspectiveCamera camera, Environment environment) {
         player.update(delta);
         CameraFollowUtils.updateCameraTo(camera, player.getPosition());
         camera.update();
@@ -49,17 +47,17 @@ public final class InstanceManager {
 
         ScreenUtils.clear(ColorUtils.BLACK, true);
         modelBatch.begin(camera);
-        modelBatch.render(InstanceManager.getInstances(), environment);
+        modelBatch.render(instances, environment);
         modelBatch.end();
     }
 
-    static void createInitial(ModelBuilder modelBuilder) {
-        InstanceManager.add(sky.create(modelBuilder));
-        InstanceManager.add(room.create(modelBuilder));
-        InstanceManager.add(player.create(modelBuilder));
+    void createInitial(ModelBuilder modelBuilder) {
+        this.add(sky.create(modelBuilder));
+        this.add(room.create(modelBuilder));
+        this.add(player.create(modelBuilder));
     }
 
-    static void disposeAll() {
+    void disposeAll() {
         room.dispose();
         player.dispose();
         sky.dispose();
