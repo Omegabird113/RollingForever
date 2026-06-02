@@ -29,7 +29,7 @@ public class ColorUtils {
         return getNBitColor(n, r, g, b, 255);
     }
 
-    public static Color getAverageColor(Collection<Color> colors) {
+    public static Color getAverage(Collection<Color> colors) {
         Array<Float> rValues = new Array<>();
         Array<Float> gValues = new Array<>();
         Array<Float> bValues = new Array<>();
