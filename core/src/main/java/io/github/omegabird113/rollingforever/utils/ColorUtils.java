@@ -7,26 +7,26 @@ import java.util.Arrays;
 import java.util.Collection;
 
 public class ColorUtils {
-    public static final Color BLACK = get8BitColor(0, 0, 0);
-    public static final Color WHITE = get8BitColor(255, 255, 255);
-    public static final Color PURE_RED = get8BitColor(255, 0, 0);
-    public static final Color PURE_GREEN = get8BitColor(255, 0, 255);
-    public static final Color PURE_BLUE = get8BitColor(0, 0, 255);
+    public static final Color BLACK = get8Bit(0, 0, 0);
+    public static final Color WHITE = get8Bit(255, 255, 255);
+    public static final Color PURE_RED = get8Bit(255, 0, 0);
+    public static final Color PURE_GREEN = get8Bit(255, 0, 255);
+    public static final Color PURE_BLUE = get8Bit(0, 0, 255);
 
-    public static Color get8BitColor(int r, int g, int b, int a) {
+    public static Color get8Bit(int r, int g, int b, int a) {
         return new Color(r / 255f, g / 255f, b / 255f, a / 255f);
     }
 
-    public static Color get8BitColor(int r, int g, int b) {
-        return get8BitColor(r, g, b, 255);
+    public static Color get8Bit(int r, int g, int b) {
+        return get8Bit(r, g, b, 255);
     }
 
-    public static Color getNBitColor(int n, int r, int g, int b, int a) {
+    public static Color getNBit(int n, int r, int g, int b, int a) {
         return new Color(r / (float) n, g / (float) n, b / (float) n, a / (float) n);
     }
 
-    public static Color getNBitColor(int n, int r, int g, int b) {
-        return getNBitColor(n, r, g, b, 255);
+    public static Color getNBit(int n, int r, int g, int b) {
+        return getNBit(n, r, g, b, 255);
     }
 
     public static Color getAverage(Collection<Color> colors) {
@@ -49,5 +49,12 @@ public class ColorUtils {
         float bAverage = bSum / bValues.size;
 
         return new Color(rAverage, gAverage, bAverage, 1f);
+    }
+
+    public static Color getRandomNBit(int n) {
+        int r = RandomUtils.randomInt(0, n, true);
+        int g = RandomUtils.randomInt(0, n, true);
+        int b = RandomUtils.randomInt(0, n, true);
+        return getNBit(n, r, g, b);
     }
 }
