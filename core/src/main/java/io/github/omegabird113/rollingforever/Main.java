@@ -5,25 +5,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
-import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
-import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.ScreenUtils;
-import io.github.omegabird113.rollingforever.objects.Player;
-import io.github.omegabird113.rollingforever.objects.Room;
-import io.github.omegabird113.rollingforever.objects.Sky;
 import io.github.omegabird113.rollingforever.utils.CameraFollowUtils;
-import io.github.omegabird113.rollingforever.utils.ColorUtils;
 
 public class Main extends ApplicationAdapter {
-    private final Room room = new Room();
-    private final Player player = new Player();
-    private final Sky sky = new Sky();
     private PerspectiveCamera camera;
     private Environment environment;
-    private Array<ModelInstance> instances;
     private ModelBatch modelBatch;
 
     @Override
@@ -40,28 +29,14 @@ public class Main extends ApplicationAdapter {
         environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
 
         ModelBuilder modelBuilder = new ModelBuilder();
-
-        instances = new Array<>();
-        instances.add(sky.create(modelBuilder));
-        instances.addAll(room.create(modelBuilder));
-        instances.add(player.create(modelBuilder));
-
+        InstanceManager.createInitial(modelBuilder);
         modelBatch = new ModelBatch();
     }
 
     @Override
     public void render() {
         float delta = Gdx.graphics.getDeltaTime();
-
-        player.update(delta);
-        CameraFollowUtils.updateCameraTo(camera, player.getPosition());
-        camera.update();
-        sky.update(camera.position);
-
-        ScreenUtils.clear(ColorUtils.BLACK, true);
-        modelBatch.begin(camera);
-        modelBatch.render(instances, environment);
-        modelBatch.end();
+        InstanceManager.render(delta, modelBatch, camera, environment);
     }
 
     @Override
@@ -74,8 +49,6 @@ public class Main extends ApplicationAdapter {
     @Override
     public void dispose() {
         modelBatch.dispose();
-        room.dispose();
-        player.dispose();
-        sky.dispose();
+        InstanceManager.disposeAll();
     }
 }
