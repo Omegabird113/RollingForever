@@ -46,11 +46,35 @@ jobs:
       - name: Build release artifacts
         run: ./gradlew clean :lwjgl3:jar :teavm:build
 
+      - name: Build native packages
+        run: |
+          set -euo pipefail
+
+          ./gradlew :lwjgl3:packageWinX64
+          ./gradlew :lwjgl3:packageMacM1
+          ./gradlew :lwjgl3:packageMacX64
+          ./gradlew :lwjgl3:packageLinuxX64
+
       - name: Package artifacts
         run: |
           set -euo pipefail
 
           mkdir -p release
+
+          copy_native_package() {
+            local target="$1"
+            local output_name="$2"
+            local -a package_files
+
+            mapfile -t package_files < <(find lwjgl3/build/construo/dist -maxdepth 1 -name "*-${target}.zip" -type f | sort)
+            if [ "${#package_files[@]}" -ne 1 ]; then
+              printf 'Expected exactly one package for %s, found %s\n' "$target" "${#package_files[@]}" >&2
+              printf '%s\n' "${package_files[@]}" >&2
+              exit 1
+            fi
+
+            cp "${package_files[0]}" "release/${output_name}"
+          }
 
           mapfile -t jar_files < <(find lwjgl3/build/libs -maxdepth 1 -name '*.jar' -type f | sort)
           if [ "${#jar_files[@]}" -ne 1 ]; then
@@ -60,6 +84,10 @@ jobs:
           fi
 
           cp "${jar_files[0]}" release/
+          copy_native_package winX64 rolling-forever-windows-x64.zip
+          copy_native_package macM1 rolling-forever-macos-arm64.zip
+          copy_native_package macX64 rolling-forever-macos-x64.zip
+          copy_native_package linuxX64 rolling-forever-linux-x64.zip
 
           cd teavm/build/dist/webapp
           zip -r "$GITHUB_WORKSPACE/release/rolling-forever-site.zip" .
