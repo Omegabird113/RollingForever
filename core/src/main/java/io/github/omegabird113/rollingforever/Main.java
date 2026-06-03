@@ -11,10 +11,10 @@ import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import io.github.omegabird113.rollingforever.utils.CameraFollowUtils;
 
 public class Main extends ApplicationAdapter {
+    private final InstanceManager instanceManager = new InstanceManager();
     private PerspectiveCamera camera;
     private Environment environment;
     private ModelBatch modelBatch;
-    private final InstanceManager instanceManager = new InstanceManager();
 
     @Override
     public void create() {

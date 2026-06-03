@@ -16,12 +16,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public  class InstanceManager {
+public class InstanceManager {
+    public final ArrayList<ModelInstance> instances = new ArrayList<>();
     private final Room room = new Room();
     private final Player player = new Player();
     private final Sky sky = new Sky();
-
-    public final ArrayList<ModelInstance> instances = new ArrayList<>();
 
     public ArrayList<ModelInstance> getInstances() {
         return instances;

@@ -4,13 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 
 public final class InputKeyUtils {
-    private InputKeyUtils() {}
-
-    public enum KeyType {
-        FORWARD,
-        BACKWARD,
-        LEFT,
-        RIGHT
+    private InputKeyUtils() {
     }
 
     public static boolean isKeyDown(KeyType keyType) {
@@ -20,5 +14,12 @@ public final class InputKeyUtils {
             case LEFT -> Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT);
             case RIGHT -> Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT);
         };
+    }
+
+    public enum KeyType {
+        FORWARD,
+        BACKWARD,
+        LEFT,
+        RIGHT
     }
 }
