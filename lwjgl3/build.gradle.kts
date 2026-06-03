@@ -1,5 +1,6 @@
 import io.github.fourlastor.construo.ConstruoPluginExtension
 import io.github.fourlastor.construo.Target
+import org.graalvm.buildtools.gradle.dsl.GraalVMExtension
 import org.gradle.jvm.application.tasks.CreateStartScripts
 import org.gradle.plugins.ide.eclipse.model.EclipseModel
 import java.util.Locale
@@ -7,6 +8,7 @@ import java.util.Locale
 plugins {
   application
   id("io.github.fourlastor.construo") version "2.1.0"
+  id("org.graalvm.buildtools.native") version "1.1.1" apply false
 }
 
 val appName = extra["appName"] as String
@@ -215,5 +217,53 @@ tasks.withType<JavaExec>().configureEach {
 }
 
 if (enableGraalNative == "true") {
-  apply(from = file("nativeimage.gradle.kts"))
+  apply(plugin = "org.graalvm.buildtools.native")
+
+  extensions.configure<GraalVMExtension>("graalvmNative") {
+    binaries {
+      named("main") {
+        imageName.set(appName)
+        mainClass.set(application.mainClass)
+        buildArgs.add("-march=compatibility")
+        jvmArgs.add("-Dfile.encoding=UTF8")
+        sharedLibrary.set(false)
+        resources.autodetect()
+      }
+    }
+  }
+
+  tasks.named<JavaExec>("run") {
+    doNotTrackState("Running the app should not be affected by Graal.")
+  }
+
+  // This creates a resource-config.json file based on the assets folder, libGDX icons, and libGDX font files.
+  tasks.named("generateResourcesConfigFile") {
+    doFirst {
+      val assetsFolder = rootProject.file("assets")
+      val resFolder = project.file("src/main/resources/META-INF/native-image/$appName")
+      resFolder.mkdirs()
+
+      val resFile = File(resFolder, "resource-config.json")
+      resFile.delete()
+      resFile.appendText(
+        """{
+  "resources":{
+  "includes":[
+    {
+      "pattern": ".*("""
+      )
+
+      fileTree(assetsFolder).forEach {
+        resFile.appendText("\\\\Q${it.name}\\\\E|")
+      }
+
+      resFile.appendText(
+        """libgdx.+\\.png|lsans.+)"
+    }
+  ]},
+  "bundles":[]
+}"""
+      )
+    }
+  }
 }
