@@ -152,12 +152,12 @@ extensions.configure<ConstruoPluginExtension>("construo") {
 
   targets.register("linuxX64", Target.Linux::class.java) {
     architecture.set(Target.Architecture.X86_64)
-    jdkUrl.set("https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.10%2B7/OpenJDK21U-jdk_x64_linux_hotspot_21.0.10_7.tar.gz")
+    jdkUrl.set("https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.11%2B10/OpenJDK21U-jdk_x64_linux_hotspot_21.0.11_10.tar.gz")
     // Linux does not currently have a way to set the icon on the executable.
   }
   targets.register("macM1", Target.MacOs::class.java) {
     architecture.set(Target.Architecture.AARCH64)
-    jdkUrl.set("https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.10%2B7/OpenJDK21U-jdk_aarch64_mac_hotspot_21.0.10_7.tar.gz")
+    jdkUrl.set("https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.11%2B10/OpenJDK21U-jdk_aarch64_mac_hotspot_21.0.11_10.tar.gz")
     // macOS needs an identifier.
     identifier.set("io.github.omegabird113.rollingforever.$appName")
     // Optional: icon for macOS, as an ICNS file.
@@ -165,7 +165,7 @@ extensions.configure<ConstruoPluginExtension>("construo") {
   }
   targets.register("macX64", Target.MacOs::class.java) {
     architecture.set(Target.Architecture.X86_64)
-    jdkUrl.set("https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.10%2B7/OpenJDK21U-jdk_x64_mac_hotspot_21.0.10_7.tar.gz")
+    jdkUrl.set("https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.11%2B10/OpenJDK21U-jdk_x64_mac_hotspot_21.0.11_10.tar.gz")
     // macOS needs an identifier.
     identifier.set("io.github.omegabird113.rollingforever.$appName")
     // Optional: icon for macOS, as an ICNS file.
@@ -175,7 +175,7 @@ extensions.configure<ConstruoPluginExtension>("construo") {
     architecture.set(Target.Architecture.X86_64)
     // Optional: icon for Windows, as a PNG.
     icon.set(project.file("icons/logo.png"))
-    jdkUrl.set("https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.10%2B7/OpenJDK21U-jdk_x64_windows_hotspot_21.0.10_7.zip")
+    jdkUrl.set("https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.11%2B10/OpenJDK21U-jdk_x64_windows_hotspot_21.0.11_10.zip")
     // Uncomment the next line to show a console when the game runs, to print messages.
     // useConsole.set(true)
   }
