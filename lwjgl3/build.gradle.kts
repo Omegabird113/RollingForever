@@ -25,7 +25,7 @@ import java.util.Locale
 
 plugins {
   application
-  id("io.github.fourlastor.construo") version "2.1.0"
+  id("io.github.fourlastor.construo") version "2.2.0"
   id("org.graalvm.buildtools.native") version "1.1.5" apply false
 }
 
