@@ -26,7 +26,7 @@ import java.util.Locale
 plugins {
   application
   id("io.github.fourlastor.construo") version "2.2.1"
-  id("org.graalvm.buildtools.native") version "1.1.6" apply false
+  id("org.graalvm.buildtools.native") version "1.1.7" apply false
 }
 
 val appName = extra["appName"] as String
